@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETA 3 - Harold B. Brocoy</title>
+    
+    <style>
+        /* css - designs and appearance */
+        body {
+            background-image: url(bg.png);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: wheat;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: rgb(70, 128, 159);
+            color: #021d23;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: wheat;
+            font-size: 0.9em;
+            color: #010d0e;
+        }
+
+        /* box for forms, aligned--right */
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        label {
+            flex: 1;
+            margin-right: 10px;
+            text-align: left;
+        }
+
+        input[type="number"], input[type="text"] {
+            flex: 1;
+            padding: 5px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: rgb(70, 128, 159);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: rgb(50, 100, 130);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>P E T A 3</h1>
+            <h4>by Harold B. Brocoy</h4>
+        </header>
+
+        <!-- Form to input and calculate the area of circle -->
+        <h3>Calculate the Area of Circle</h3>
+        <form id="circleForm">
+            <div class="form-group">
+                <label for="radius">Radius:</label>
+                <input type="number" id="radius" required>
+            </div>
+            <input type="submit" value="Calculate">
+            <p style="text-align: right" id="circleResult"></p> <!-- Displays the result -->
+        </form>
+
+        <!-- Form to input and calculate the area of triangle -->
+        <h3>Calculate the Area of Triangle</h3>
+        <form id="triangleForm">
+            <div class="form-group">
+                <label for="base">Base:</label>
+                <input type="number" id="base" required>
+            </div>
+            <div class="form-group">
+                <label for="height">Height:</label>
+                <input type="number" id="height" required>
+            </div>
+            <input type="submit" value="Calculate">
+            <p style="text-align: right" id="triangleResult"></p> <!-- Displays the result -->
+        </form>
+
+        <!-- Form to input and calculate the average of grades -->
+        <h3>Calculate Average of Grades</h3>
+        <form id="averageForm">
+            <div class="form-group">
+                <label for="gradesInput">Enter 8 Grades (comma separated):</label>
+                <input type="text" id="gradesInput" placeholder="e.g., 90, 91, 98, 97..." required>
+            </div>
+            <input type="submit" value="Calculate Average">
+            <p style="text-align: right" id="averageResult"></p> <!-- Displays the average result -->
+        </form>
+
+        <!-- Footer section -->
+        <footer>
+            <p>&copy; 2024 Harold B. Brocoy. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Circle area calculation
+        document.getElementById('circleForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission
+            const radius = parseFloat(document.getElementById('radius').value);
+            const area = Math.PI * radius * radius; // Formula for circle area
+            document.getElementById('circleResult').innerText = `Area of Circle: ${area.toFixed(2)}`;
+        });
+
+        // Triangle area calculation
+        document.getElementById('triangleForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission
+            const base = parseFloat(document.getElementById('base').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const area = 0.5 * base * height; // Formula for triangle area
+            document.getElementById('triangleResult').innerText = `Area of Triangle: ${area.toFixed(2)}`;
+        });
+
+        // Average calculation for user input
+        document.getElementById('averageForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission
+            const gradesInput = document.getElementById('gradesInput').value; 
+            const gradesArray = gradesInput.split(',').map(Number); 
+
+            if (gradesArray.length !== 8 || gradesArray.some(isNaN)) {
+                alert('Please enter exactly 8 valid numbers.');
+                return;
+            }
+
+            const average = gradesArray.reduce((a, b) => a + b, 0) / gradesArray.length; // Calculate average
+            document.getElementById('averageResult').innerText = `Average: ${average.toFixed(2)}`; // Display result
+        });
+    </script>
+</body>
+</html>
